@@ -94,17 +94,22 @@
         clickableTrigger.classList.toggle('active');
 
         // find all active products
-
+        const activeProducts = document.querySelectorAll('active');
+        console.log(activeProducts);
+        
           // START LOOP: for each active product
+        for(let activeProduct of activeProducts){
 
           // START:  if the active product isn't the element of thisProduct
+          if(activeProduct !== thisProduct){
 
             // remove class active for the active product
-          
+            activeProduct.classList.remove('active');
+            
           // END: if the active product isn't the element of thisProduct
-
+          }
         // END LOOP: for each active product
-        
+        }
       // END click event listener to trigger
     });
     }
