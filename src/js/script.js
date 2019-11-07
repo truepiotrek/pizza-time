@@ -84,13 +84,14 @@
       const clickableTrigger = thisProduct.element;
 
       // START: click event listener to trigger
-      clickableTrigger.addEventListener('click', function(event){
+      clickableTrigger.addEventListener('click', function(){
         console.log('click!');
 
         // prevent default action on event
         event.preventDefault();
         
         // toggle active class on element of thisProduct
+        clickableTrigger.classList.toggle('active');
 
         // find all active products
 
