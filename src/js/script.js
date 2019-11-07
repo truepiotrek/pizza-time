@@ -81,13 +81,15 @@
       const thisProduct = this;
 
       // find the clickable trigger (element that should reacto to clicks)
-      const clickableTrigger = document.querySelector('.product__header');
+      const clickableTrigger = thisProduct.element;
 
       // START: click event listener to trigger
-      clickableTrigger.addEventListener('click', function(){
+      clickableTrigger.addEventListener('click', function(event){
         console.log('click!');
-        });
 
+        // prevent default action on event
+        event.preventDefault();
+        
         // toggle active class on element of thisProduct
 
         // find all active products
@@ -103,7 +105,7 @@
         // END LOOP: for each active product
         
       // END click event listener to trigger
-
+    });
     }
   }
 

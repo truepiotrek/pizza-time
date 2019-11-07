@@ -8,10 +8,7 @@
         "ecmaVersion": 2015
     },
     "rules": {
-        "indent": [
-            "error",
-            2
-        ],
+        "indent": "off",
         "linebreak-style": [
             "error",
             "unix"
