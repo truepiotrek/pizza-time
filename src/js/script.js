@@ -94,7 +94,7 @@
         clickableTrigger.classList.toggle('active');
 
         // find all active products
-        const activeProducts = document.querySelectorAll('active');
+        const activeProducts = document.querySelectorAll('.active');
         console.log(activeProducts);
         
           // START LOOP: for each active product
