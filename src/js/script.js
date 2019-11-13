@@ -65,6 +65,10 @@
       thisProduct.getElements();
 
       thisProduct.initAccordion();
+
+      thisProduct.initOrderForm();
+
+      thisProduct.processOrder();
     }
 
     renderInMenu() {
@@ -125,6 +129,33 @@
 
       // END click event listener to trigger
     });
+    }
+
+    initOrderForm() {
+      const thisProduct = this;
+      console.log('Init Order Form start');
+
+      thisProduct.form.addEventListener('submit', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+      
+      for(let input of thisProduct.formInputs) {
+        input.addEventListener('change', thisProduct.processOrder);
+      }
+      
+      thisProduct.cartButton.addEventListener('click', function(event){
+        event.preventDefault();
+        thisProduct.processOrder();
+      });
+    }
+
+    processOrder() {
+      const thisProduct = this;
+      console.log('Process Order start');
+
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      console.log('form data', formData);
     }
   }
 
