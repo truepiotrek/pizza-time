@@ -67,7 +67,7 @@
       thisProduct.initAccordion();
     }
 
-    renderInMenu(){
+    renderInMenu() {
       const thisProduct = this;
       // generate hmtl based on template
       const generatedHTML = templates.menuProduct(thisProduct.data);
@@ -79,7 +79,7 @@
       menuContainer.appendChild(thisProduct.element);
     }
 
-    getElements(){
+    getElements() {
       const thisProduct = this;
     
       thisProduct.accordionTrigger = thisProduct.element.querySelector(select.menuProduct.clickable);
@@ -93,17 +93,16 @@
       const thisProduct = this;
 
       // find the clickable trigger (element that should react to clicks)
-      const clickableTrigger = thisProduct.element;
 
       // START: click event listener to trigger
-      clickableTrigger.addEventListener('click', function(){
+      thisProduct.accordionTrigger.addEventListener('click', function(){
         console.log('click!');
 
         // prevent default action on event
         event.preventDefault();
         
         // toggle active class on element of thisProduct
-        clickableTrigger.classList.toggle('active');
+        thisProduct.element.classList.toggle('active');
 
         // find all active products
         const activeProducts = document.querySelectorAll('.active');
@@ -113,7 +112,7 @@
         for(let activeProduct of activeProducts){
 
           // START:  if the active product isn't the element of thisProduct
-          if(activeProduct !== clickableTrigger){
+          if(activeProduct !== thisProduct.element){
 
             // remove class active for the active product
             activeProduct.classList.remove('active');
