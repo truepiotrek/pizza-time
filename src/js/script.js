@@ -60,7 +60,7 @@
       thisProduct.data = data;
 
       thisProduct.renderInMenu();
-      console.log('new Product', thisProduct);
+      // console.log('new Product', thisProduct);
 
       thisProduct.getElements();
 
@@ -101,7 +101,7 @@
 
       // START: click event listener to trigger
       thisProduct.accordionTrigger.addEventListener('click', function(){
-        console.log('click!');
+        // console.log('click!');
 
         // prevent default action on event
         event.preventDefault();
@@ -111,7 +111,7 @@
 
         // find all active products
         const activeProducts = document.querySelectorAll('.product.active');
-        console.log(activeProducts);
+        // console.log(activeProducts);
         
           // START LOOP: for each active product
         for(let activeProduct of activeProducts){
@@ -134,7 +134,7 @@
 
     initOrderForm() {
       const thisProduct = this;
-      console.log('Init Order Form start');
+      // console.log('Init Order Form start');
 
       thisProduct.form.addEventListener('submit', function(event){
         event.preventDefault();
@@ -159,7 +159,7 @@
 
       /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
       const formData = utils.serializeFormToObject(thisProduct.form);
-      console.log('form data', formData);
+      // console.log('form data', formData);
 
       /* set variable price to equal thisProduct.data.price */
       let price = thisProduct.data.price;
@@ -182,7 +182,6 @@
 
             /* add price of option to variable price */
             price += option.price;
-            console.log('dodaje koszty', price);
 
           /* END IF: if option is selected and option is not default */
           } 
@@ -192,23 +191,23 @@
 
             /* deduct price of option from price */
             price -= option.price;
-            console.log('odejmuje cene', price);
-
-            /* START adding active class to selected picture items */
-            const productPictures = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId); // znajduję obrazki
-            console.log('tu sa obrazki', productPictures);
             
-            for(let index of productPictures) {
-              console.log(typeof productPictures);
-              if(optionSelected) {
-                productPictures[index].classList.add('active');
-              } else {
-                productPictures[index].classList.remove('active');
-              }
-            }
-
           /* END ELSE IF: if option is not selected and option is default */
           }
+
+          /* START adding active class to selected picture items */
+          const productPictures = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId); // znajduję obrazki
+          console.log('tu sa obrazki', productPictures);
+          
+          productPictures.forEach(function(item) {
+            console.log(item);
+            console.log(optionSelected);
+            if(optionSelected) {
+              item.classList.add('active');
+            } else {
+              item.classList.remove('active');
+            }
+          });
           
           
         /* END LOOP: for each optionId in param.options */
@@ -218,7 +217,6 @@
       }
         
       /* set the contents of thisProduct.priceElem to be the value of variable price */
-      console.log(thisProduct.priceElem);
       thisProduct.priceElem.innerHTML = price;
     }
   }
