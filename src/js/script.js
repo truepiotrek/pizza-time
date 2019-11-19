@@ -110,7 +110,7 @@
         thisProduct.element.classList.toggle('active');
 
         // find all active products
-        const activeProducts = document.querySelectorAll('.active');
+        const activeProducts = document.querySelectorAll('.product.active');
         console.log(activeProducts);
         
           // START LOOP: for each active product
@@ -160,7 +160,7 @@
       /* read all data from the form (using utils.serializeFormToObject) and save it to const formData */
       const formData = utils.serializeFormToObject(thisProduct.form);
       console.log('form data', formData);
-      
+
       /* set variable price to equal thisProduct.data.price */
       let price = thisProduct.data.price;
 
@@ -194,15 +194,23 @@
             price -= option.price;
             console.log('odejmuje cene', price);
 
+            /* START adding active class to selected picture items */
+            const productPictures = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId); // znajduję obrazki
+            console.log('tu sa obrazki', productPictures);
+            
+            for(let index of productPictures) {
+              console.log(typeof productPictures);
+              if(optionSelected) {
+                productPictures[index].classList.add('active');
+              } else {
+                productPictures[index].classList.remove('active');
+              }
+            }
+
           /* END ELSE IF: if option is not selected and option is default */
           }
-          console.log('to jest image wrapper', thisProduct.imageWrapper);
-          if(optionSelected) {
-            thisProduct.imageWrapper.innerHTML.add(classNames.menuProduct.imageVisible);
-          } else {
-            thisProduct.imageWrapper.innerHTML.remove(classNames.menuProduct.imageVisible);
-          }
-
+          
+          
         /* END LOOP: for each optionId in param.options */
         }
 
