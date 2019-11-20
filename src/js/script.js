@@ -264,7 +264,7 @@
       let newValue = parseInt(value);
 
       // TODO: Add validation
-      if(newValue !== settings.amountWidget.defaultValue || newValue <= settings.amountWidget.defaultMax || newValue >= settings.amountWidget.defaultMin) {
+      if(newValue !== thisWidget.value && newValue <= settings.amountWidget.defaultMax && newValue >= settings.amountWidget.defaultMin) {
         thisWidget.value = newValue;
         thisWidget.announce();
       }
