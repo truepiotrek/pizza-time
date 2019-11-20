@@ -228,6 +228,7 @@
 
       thisProduct.amountWidgetElem.addEventListener('updated', function(event){
         thisProduct.processOrder();
+        console.log(event);
       });
     }
   }
@@ -238,7 +239,7 @@
       const thisWidget = this;
       thisWidget.getElements(element);
 
-      thisWidget.value = 1;
+      thisWidget.value = settings.amountWidget.defaultValue;
 
       thisWidget.setValue(thisWidget.input.value);
 
@@ -263,18 +264,11 @@
       let newValue = parseInt(value);
 
       // TODO: Add validation
-      if(newValue !== settings.amountWidget.defaultValue){
-        newValue = settings.amountWidget.defaultValue;
+      if(newValue !== settings.amountWidget.defaultValue || newValue <= settings.amountWidget.defaultMax || newValue >= settings.amountWidget.defaultMin) {
+        thisWidget.value = newValue;
+        thisWidget.announce();
       }
-      if(newValue > settings.amountWidget.defaultMax){
-        newValue = settings.amountWidget.defaultMax;
-      } 
-      if(newValue < settings.amountWidget.defaultMin) {
-        newValue = settings.amountWidget.defaultMin;
-      } 
-      
-      thisWidget.value = newValue;
-      thisWidget.announce();
+
 
 
       thisWidget.input.value = thisWidget.value;
