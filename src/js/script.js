@@ -230,21 +230,15 @@
           /* START adding active class to selected picture items */
           const productPictures = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId); // znajduję obrazki
           
-          
-            if(optionSelected) {
-              for(let productPicture in productPictures) {
-                productPicture.classList.add(classNames.menuProduct.imageVisible);
-                }
-              } else {
-                for(let productPicture in productPictures) {
-                  productPicture.classList.remove(classNames.menuProduct.imageVisible);
-                }
-              }
-                
-              
-          
-          
-          
+          if(optionSelected) {
+            for(let productPicture of productPictures) {
+              productPicture.classList.add(classNames.menuProduct.imageVisible);
+            }
+          } else {
+            for(let productPicture of productPictures) {
+              productPicture.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
         /* END LOOP: for each optionId in param.options */
         }
       /* END LOOP: for each paramId in thisProduct.data.params */
