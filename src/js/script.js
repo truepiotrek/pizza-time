@@ -230,13 +230,19 @@
           /* START adding active class to selected picture items */
           const productPictures = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId); // znajduję obrazki
           
-          productPictures.forEach(function(item) {
+          
             if(optionSelected) {
-              item.classList.add(classNames.menuProduct.imageVisible);
-            } else {
-              item.classList.remove(classNames.menuProduct.imageVisible);
-            }
-          });
+              for(let productPicture in productPictures) {
+                productPicture.classList.add(classNames.menuProduct.imageVisible);
+                }
+              } else {
+                for(let productPicture in productPictures) {
+                  productPicture.classList.remove(classNames.menuProduct.imageVisible);
+                }
+              }
+                
+              
+          
           
           
         /* END LOOP: for each optionId in param.options */
