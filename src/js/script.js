@@ -231,6 +231,13 @@
           const productPictures = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId); // znajduję obrazki
           
           if(optionSelected) {
+            if(!thisProduct.params[paramId]){
+              thisProduct.params[paramId] = {
+                label: param.label,
+                options: {},
+              };
+            }
+            thisProduct.params[paramId].options[optionId] = option.label;
             for(let productPicture of productPictures) {
               productPicture.classList.add(classNames.menuProduct.imageVisible);
             }
@@ -250,6 +257,8 @@
 
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.priceElem.innerHTML = thisProduct.price;
+
+      console.log('thisProduct.params', thisProduct.params);
     }
 
     initAmountWidget(){
@@ -369,10 +378,24 @@
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
     }
 
-    add(menuProduct){
-      // const thisCart = this;
 
-      console.log('adding product', menuProduct);
+    
+    add(cartProduct){
+      const thisCart = this;
+
+      // generate hmtl based on template
+      const generatedHTML = templates.cartProduct(thisCart.data);
+
+      // create element using utils.createElementFromHTML
+      thisCart.element = utils.createDOMFromHTML(generatedHTML);
+
+      // find menu container
+      const menuContainer = document.querySelector(select.containerOf.menu);
+
+      // add element to menu
+      menuContainer.appendChild(thisCart.element);
+
+      console.log('adding product', cartProduct);
     }
   }
   
