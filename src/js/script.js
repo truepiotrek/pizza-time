@@ -85,6 +85,7 @@
 
       thisProduct.id = id;
       thisProduct.data = data;
+      thisProduct.name = data.name;
 
       thisProduct.renderInMenu();
       // console.log('new Product', thisProduct);
@@ -377,25 +378,25 @@
 
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
 
-      thisCart.dom.productList = ;
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
       
     }
 
 
     
-    add(){
+    add(products){
+    console.log(products);
+
       const thisCart = this;
 
       // generate hmtl based on template
-      const generatedHTML = templates.cartProduct(thisCart.products);
+      const generatedHTML = templates.cartProduct(products);
+      console.log(generatedHTML);
       
       // create element using utils.createElementFromHTML
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
       console.log(generatedDOM);
 
-      // find menu container
-      // const cartContainer = document.querySelector(select.containerOf.cart);
-      // console.log(cartContainer);
 
       // add element to cart
       thisCart.dom.productList.appendChild(generatedDOM);
