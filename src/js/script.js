@@ -376,26 +376,29 @@
       thisCart.dom.wrapper = element;
 
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
+
+      thisCart.dom.productList = ;
+      
     }
 
 
     
-    add(cartProduct){
+    add(){
       const thisCart = this;
 
       // generate hmtl based on template
-      const generatedHTML = templates.cartProduct(thisCart.data);
-
+      const generatedHTML = templates.cartProduct(thisCart.products);
+      
       // create element using utils.createElementFromHTML
-      thisCart.element = utils.createDOMFromHTML(generatedHTML);
+      const generatedDOM = utils.createDOMFromHTML(generatedHTML);
+      console.log(generatedDOM);
 
       // find menu container
-      const menuContainer = document.querySelector(select.containerOf.menu);
+      // const cartContainer = document.querySelector(select.containerOf.cart);
+      // console.log(cartContainer);
 
-      // add element to menu
-      menuContainer.appendChild(thisCart.element);
-
-      console.log('adding product', cartProduct);
+      // add element to cart
+      thisCart.dom.productList.appendChild(generatedDOM);
     }
   }
   
