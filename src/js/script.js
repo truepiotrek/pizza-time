@@ -276,8 +276,11 @@
     addToCart(){
       const thisProduct = this;
 
-      thisProduct.data.name = thisProduct.name;
-      thisProduct.amountWidget.value = thisProduct.amount; // jezeli zmienie na amountWidgetElem to mozna zmniejszac ilosc po dodaniu ale wciaz nie dziala poprawnie
+      // thisProduct.data.name = thisProduct.name;
+      thisProduct.name = thisProduct.data.name;
+      // thisProduct.amountWidget.value = thisProduct.amount; // jezeli zmienie na amountWidgetElem to mozna zmniejszac ilosc po dodaniu ale wciaz nie dziala poprawnie
+      thisProduct.amount = thisProduct.amountWidget.value;
+
       app.cart.add(thisProduct);
     }
   }
