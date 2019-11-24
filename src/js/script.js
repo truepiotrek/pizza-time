@@ -385,7 +385,7 @@
 
     
     add(menuProduct){
-    console.log(menuProduct);
+    console.log('adding product', menuProduct);
 
       const thisCart = this;
 
