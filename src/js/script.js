@@ -442,10 +442,11 @@
 
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
 
-      thisCartProduct.dom.amountWidget.addEventListener('click', function(event){
+      thisCartProduct.amountWidget.addEventListener('click', function(event){
         thisCartProduct.amount = thisCartProduct.amountWidget.value; 
         thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
         console.log(event);
+        
 
         console.log('tu jest cena', thisCartProduct.dom.price);
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
