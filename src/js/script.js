@@ -259,7 +259,7 @@
       /* set the contents of thisProduct.priceElem to be the value of variable price */
       thisProduct.priceElem.innerHTML = thisProduct.price;
 
-      console.log('thisProduct.params', thisProduct.params);
+      // console.log('thisProduct.params', thisProduct.params);
     }
 
     initAmountWidget(){
@@ -358,11 +358,14 @@
       const thisCart = this;
 
       thisCart.products = [];
+      thisCart.deliveryFee = settings.cart.defaultDeliveryFee;
+      console.log(thisCart.deliveryFee);
+      
 
       thisCart.getElements(element);
       thisCart.initActions(element);
 
-      console.log('new cart', thisCart);
+      // console.log('new cart', thisCart);
     }
 
     initActions(){
@@ -392,7 +395,7 @@
 
     
     add(menuProduct){
-    console.log('adding product', menuProduct);
+    // console.log('adding product', menuProduct);
 
       const thisCart = this;
 
@@ -406,7 +409,23 @@
       thisCart.dom.productList.appendChild(generatedDOM);
 
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
-      console.log('thisCart.products', thisCart.products);
+      // console.log('thisCart.products', thisCart.products);
+
+      thisCart.update();
+    }
+
+    update () {
+      const thisCart = this;
+
+      thisCart.totalNumber = 0;
+      thisCart.subtotalPrice = 0;
+
+      for(let product of thisCart.products){
+        thisCart.subtotalPrice =+ product.price;
+        thisCart.totalNumber =+ product.amount;
+      }
+      thisCart.totalPrice = thisCart.subtotalPrice + thisCart.deliveryFee;
+      console.log(thisCart.totalNumber, thisCart.subtotalPrice, thisCart.totalPrice);
     }
   }
   
@@ -424,8 +443,8 @@
       thisCartProduct.getElements(element);
       thisCartProduct.initAmountWidget();
 
-      console.log('new CartProduct', thisCartProduct);
-      console.log('productData', menuProduct);
+      // console.log('new CartProduct', thisCartProduct);
+      // console.log('productData', menuProduct);
     }
 
     getElements(element){
@@ -451,7 +470,7 @@
         console.log(event);
         
 
-        console.log('tu jest cena', thisCartProduct.dom.price);
+        // console.log('tu jest cena', thisCartProduct.dom.price);
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
       });
     }
