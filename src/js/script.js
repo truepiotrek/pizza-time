@@ -446,8 +446,8 @@
           elem.innerHTML = thisCart[key];
         }
       }
-      if(thisCart.totalNumber == 0){
-        console.log('liczba produktow', thisCart.totalNumber);
+      console.log('liczba produktow', thisCart.totalNumber);
+      if(thisCart.totalNumber == 0){ 
         thisCart.deliveryFee = 0;
       }
     }
