@@ -446,10 +446,6 @@
           elem.innerHTML = thisCart[key];
         }
       }
-      console.log('liczba produktow', thisCart.totalNumber);
-      if(thisCart.totalNumber == 0){ 
-        thisCart.deliveryFee = 0;
-      }
     }
 
     remove(cartProduct){
