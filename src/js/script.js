@@ -64,6 +64,12 @@
   };
 
   const settings = {
+    db: {
+      url: '//localhost:3131',
+      product: 'product',
+      order: 'order',
+    },
+    
     amountWidget: {
       defaultValue: 1,
       defaultMin: 1,
