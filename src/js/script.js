@@ -391,6 +391,11 @@
       thisCart.dom.productList.addEventListener('remove', function(event){
         thisCart.remove(event.detail.cartProduct);
       });
+
+      thisCart.dom.form.addEventListener('submit', function(event){
+        event.preventDefault();
+        thisCart.sendOrder();
+      });
     }
 
     getElements(element){
@@ -406,10 +411,31 @@
 
       thisCart.renderTotalsKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
 
+      thisCart.dom.form = element.querySelector(select.cart.form);
+
       for(let key of thisCart.renderTotalsKeys){
         thisCart.dom[key] = thisCart.dom.wrapper.querySelectorAll(select.cart[key]);
       }
       
+    }
+
+    sendOrder(){
+      const thisCart = this;
+
+      const url = settings.db.url + '/' + settings.db.order;
+
+      const payload = {
+        address: 'test',
+        totalPrice: thisCart.totalPrice,
+      };
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
     }
 
 
@@ -561,6 +587,7 @@
 
     initData: function(){
       const thisApp = this;
+      
 
       thisApp.data = {};
       const url = settings.db.url + '/' + settings.db.product;
