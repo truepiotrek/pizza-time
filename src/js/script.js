@@ -402,16 +402,14 @@
       const thisCart = this;
 
       thisCart.dom = {};
-
       thisCart.dom.wrapper = element;
-
+      thisCart.phone = thisCart.dom.wrapper.querySelector(select.cart.phone);
+      thisCart.address = thisCart.dom.wrapper.querySelector(select.cart.address);
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
-
       thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
-
       thisCart.renderTotalsKeys = ['totalNumber', 'totalPrice', 'subtotalPrice', 'deliveryFee'];
-
       thisCart.dom.form = thisCart.dom.wrapper.querySelector(select.cart.form);
+
 
       for(let key of thisCart.renderTotalsKeys){
         thisCart.dom[key] = thisCart.dom.wrapper.querySelectorAll(select.cart[key]);
@@ -425,9 +423,22 @@
       const url = settings.db.url + '/' + settings.db.order;
 
       const payload = {
-        address: 'test',
+        address: thisCart.address.value,
+        phone: thisCart.phone.value,
         totalPrice: thisCart.totalPrice,
+        totalNumber: thisCart.totalNumber,
+        subtotalPrice: thisCart.subtotalPrice,
+        deliveryFee: thisCart.deliveryFee,
+        products: [],
       };
+      
+      
+
+      for(let cartProduct of thisCart.products){
+        console.log(cartProduct, '+1');
+        
+      }
+
 
       const options = {
         method: 'POST',
