@@ -433,10 +433,8 @@
       };
       
       
-
       for(let cartProduct of thisCart.products){
-        console.log(cartProduct, '+1');
-        
+        payload.products =+ getData(cartProduct);
       }
 
 
@@ -551,6 +549,18 @@
       thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
       thisCartProduct.dom.remove = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.remove);
+    }
+
+    getData(){
+      const thisCartProduct = this;
+
+      const productInfo = {
+        id: thisCartProduct.id,
+        amount: thisCartProduct.amount,
+        price: thisCartProduct.price,
+        priceSingle:thisCartProduct.priceSingle,
+        params: thisCartProduct.params,
+      };
     }
 
     initAmountWidget(){
