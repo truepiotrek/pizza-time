@@ -434,7 +434,7 @@
       
       
       for(let cartProduct of thisCart.products){
-        payload.products =+ getData(cartProduct);
+        payload.products.push(cartProduct.getData());
       }
 
 
@@ -561,6 +561,7 @@
         priceSingle:thisCartProduct.priceSingle,
         params: thisCartProduct.params,
       };
+      return productInfo;
     }
 
     initAmountWidget(){
