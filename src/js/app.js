@@ -71,7 +71,7 @@ const app = {
     }
 
     for(let page of thisApp.pages){
-      page.classList.toggle(classNames.nav.active, page.getAttribute('href') === pageId);
+      page.classList.toggle(classNames.nav.active, page.getAttribute('id') === pageId);
     }
   },
 
