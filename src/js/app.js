@@ -44,11 +44,11 @@ const app = {
 
     thisApp.pages = Array.from(document.querySelector(select.containerOf.pages).children);
 
-    thisApp.naviLinks = Array.from(document.querySelectorAll(select.nav.links));
+    thisApp.navLinks = Array.from(document.querySelectorAll(select.nav.links));
 
     thisApp.activatePage(thisApp.pages[0].id);
 
-    for(let link of thisApp.naviLinks){
+    for(let link of thisApp.navLinks){
       link.addEventListener('click', function(event){
         const clickedElement = this;
         event.preventDefault();
@@ -66,12 +66,12 @@ const app = {
   activatePage(pageId){
     const thisApp = this;
 
-    for(let link of thisApp.naviLinks){
-      link.classList.toggle(classNames.nav.active, link.getAttribute('href') == '#' + pageId);
+    for(let link of thisApp.navLinks){
+      link.classList.toggle(classNames.nav.active, link.getAttribute('href') === '#' + pageId);
     }
 
     for(let page of thisApp.pages){
-      page.classList.toggle(classNames.nav.active, page.getAttribute('href') == pageId);
+      page.classList.toggle(classNames.nav.active, page.getAttribute('href') === pageId);
     }
   },
 
