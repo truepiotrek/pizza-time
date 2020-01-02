@@ -26,6 +26,7 @@ const app = {
       });
       console.log('thisApp.data', JSON.stringify(thisApp.data));
   },
+
   initCart: function(){
     const thisApp = this;
     const cartElem = document.querySelector(select.containerOf.cart);
@@ -38,6 +39,42 @@ const app = {
     });
   },
 
+  initPages: function(){
+    const thisApp = this;
+
+    thisApp.pages = Array.from(document.querySelector(select.containerOf.pages).children);
+
+    thisApp.naviLinks = Array.from(document.querySelectorAll(select.nav.links));
+
+    thisApp.activatePage(thisApp.pages[0].id);
+
+    for(let link of thisApp.naviLinks){
+      link.addEventListener('click', function(event){
+        const clickedElement = this;
+        event.preventDefault();
+
+        // get page id from href
+        let pageID = clickedElement.getAttribute('href');
+        pageID = pageID.replace('#', '');
+        
+        //activate page
+        thisApp.activatePage(pageID);
+      });
+    }
+  },
+
+  activatePage(pageId){
+    const thisApp = this;
+
+    for(let link of thisApp.naviLinks){
+      link.classList.toggle(classNames.nav.active, link.getAttribute('href') == '#' + pageId);
+    }
+
+    for(let page of thisApp.pages){
+      page.classList.toggle(classNames.nav.active, page.getAttribute('href') == pageId);
+    }
+  },
+
   init: function(){
     const thisApp = this;
     console.log('*** App starting ***');
@@ -46,6 +83,7 @@ const app = {
     console.log('settings:', settings);
     console.log('templates:', templates);
 
+    thisApp.initPages();
     thisApp.initData();   
     thisApp.initCart();
   },
