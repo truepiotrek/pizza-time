@@ -1,6 +1,6 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 import {app} from '../app.js';
-import {utils} from '../utils.js';
+// import {utils} from '../utils.js';
 
 export class Booking {
   constructor(){
@@ -12,12 +12,12 @@ export class Booking {
   }
 
   render(){
-    const thisBooking = this;
+    // const thisBooking = this;
 
   }
   
   initWidgets(){
-    const thisBooking = this;
+    // const thisBooking = this;
 
   }
 }
