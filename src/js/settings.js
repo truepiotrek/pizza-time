@@ -12,6 +12,11 @@
       pages: '#pages',
       booking: '.booking-wrapper',
     },
+    booking: {
+      peopleAmount: '.people-amount',
+      hoursAmount: '.hours-amount',
+      tables: '.floor-plan .table',
+    },
     all: {
       menuProducts: '#product-list > .product',
       menuProductsActive: '#product-list > .product.active',
@@ -60,11 +65,11 @@
       edit: '[href="#edit"]',
       remove: '[href="#remove"]',
     },
-    booking: {
-      peopleAmount: '.people-amount',
-      hoursAmount: '.hours-amount',
-      tables: '.floor-plan .table',
-    },
+    // booking: {
+    //   peopleAmount: '.people-amount',
+    //   hoursAmount: '.hours-amount',
+    //   tables: '.floor-plan .table',
+    // },
     nav: {
       links: '.main-nav a',
     },

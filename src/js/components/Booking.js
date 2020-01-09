@@ -1,30 +1,33 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
-import {app} from '../app.js';
-import {utils} from '../utils.js';
-import {settings, templates} from '../settings.js';
+import {templates, select} from '../settings.js';
+import { AmountWidget } from './AmountWidget.js';
 
 export class Booking {
-  constructor(){
+  constructor(reservWidgetContainer){
     const thisBooking = this;
 
-    thisBooking.render(app.initBooking);
+
+    thisBooking.render(reservWidgetContainer);
     thisBooking.initWidgets();
 
   }
 
-  render(){
+  render(bookingContainer){
     const thisBooking = this;
     const generatedHTML = templates.bookingWidget();
     
     thisBooking.dom = {};
-    thisBooking.dom.wrapper = generatedHTML;
+    thisBooking.dom.wrapper = bookingContainer;
+
+    thisBooking.dom.wrapper.innerHTML = generatedHTML;
     
-    // console.log(thisBooking.dom.wrapper);
-    
+    thisBooking.dom.peopleAmount = document.querySelector(select.booking.peopleAmount);
+    thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount);
   }
   
   initWidgets(){
     const thisBooking = this;
-
+    thisBooking.peopleAmount = new AmountWidget(thisBooking.dom.peopleAmount);
+    thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
   }
 }
