@@ -3,7 +3,7 @@ import {Cart} from './components/Cart.js';
 import {select, settings, classNames, templates} from './settings.js';
 import {Booking} from './components/Booking.js';
 
-const app = {
+export const app = {
   initMenu: function(){
     const thisApp = this;
 
@@ -93,10 +93,10 @@ const app = {
     const thisApp = this;
 
     // znajdz container widgetu do rezerwacji stron
-    const reservationWidget = document.querySelector(select.containerOf.booking);
+    const reservWidgetContainer = document.querySelector(select.containerOf.booking);
 
     // tworzy nowa instancje klasy booking
-    thisApp.booking = new Booking(reservationWidget);
+    thisApp.booking = new Booking(reservWidgetContainer);
   },
 
   init: function(){

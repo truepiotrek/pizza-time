@@ -9,7 +9,7 @@ export class Cart{
 
     thisCart.products = [];
     thisCart.deliveryFee = 0;
-    console.log(thisCart.deliveryFee);
+    // console.log(thisCart.deliveryFee);
     
 
     thisCart.getElements(element);
