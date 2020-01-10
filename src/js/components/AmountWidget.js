@@ -7,6 +7,8 @@ export class AmountWidget extends BaseWidget {
     super(wrapper, settings.amountWidget.defaultValue);
     
     const thisWidget = this;
+
+
     thisWidget.getElements();
     thisWidget.initActions();
   }
@@ -39,6 +41,11 @@ export class AmountWidget extends BaseWidget {
       event.preventDefault();
       thisWidget.value = ++ thisWidget.dom.input.value;
     });
+  }
 
+  renderValue(){
+    const thisWidget = this;
+
+    thisWidget.dom.input.value = thisWidget.value;
   }
 }

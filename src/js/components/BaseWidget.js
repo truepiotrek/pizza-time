@@ -1,6 +1,5 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
 
-
 export class BaseWidget {
 
   constructor(wrapperElement, initialValue){
