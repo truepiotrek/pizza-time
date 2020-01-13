@@ -272,7 +272,7 @@ export default class RangeSlider {
     this.onSlideEventsCount = 0;
     this.needTriggerEvents = false;
     return this;
-  };
+  }
 
   destroy() {
     dom.removeAllListenersFromEl(this, this.options.root);
