@@ -6,13 +6,15 @@ import {select, settings} from '../settings.js';
 export class HourPicker extends BaseWidget {
   constructor(wrapper){
     super(wrapper, settings.hours.open);
+
     const thisWidget = this;
 
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.hourPicker.input);
     thisWidget.dom.output = thisWidget.dom.wrapper.querySelector(select.widgets.hourPicker.output);
 
     thisWidget.initPlugin();
-    thisWidget.value = thisWidget.dom.input;
+    thisWidget.value = thisWidget.dom.input.value;
+    console.log('tu', thisWidget.dom.input.value);
   }
 
   initPlugin(){
@@ -20,13 +22,12 @@ export class HourPicker extends BaseWidget {
     rangeSlider.create(thisWidget.dom.input);
 
     thisWidget.dom.input.addEventListener('input', function(){
-      thisWidget.value = thisWidget.dom.input;
+      thisWidget.value = thisWidget.dom.input.value;
     });
   }
 
   parseValue(newValue){
-    utils.numberToHour(newValue);
-    console.log(newValue);
+    return utils.numberToHour(newValue);
   }
 
   isValid(){
