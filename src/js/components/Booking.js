@@ -45,7 +45,7 @@ export class Booking {
       eventsRepeat: settings.db.repeatParam + '&' + utils.queryParams(endDate),
     };
   
-    console.log('getData params', params);
+    // console.log('getData params', params);
 
     const urls = {
       booking: settings.db.url + '/' + settings.db.booking + '?' + params.booking,
@@ -53,7 +53,7 @@ export class Booking {
       eventsRepeat: settings.db.url + '/' + settings.db.event + '?' + params.eventsRepeat,
     };
     
-    console.log('getData urls', urls);
+    // console.log('getData urls', urls);
 
     Promise.all([
       fetch(urls.booking),
@@ -77,8 +77,46 @@ export class Booking {
 
     thisBooking.booked = {};
 
+    for(let booking of bookings){
+      thisBooking.makeBooked(booking.date, booking.hour, booking.duration, booking.table);
+    }
     
+    for(let event of eventsCurrent){
+      thisBooking.makeBooked(event.date, event.hour, event.duration, event.table);
+    }
+
+  const minDate = thisBooking.datePicker.minDate;
+  const maxDate = thisBooking.datePicker.maxDate;
+
+    for(let event of eventsRepeat){
+      if(event.repeat === 'daily'){
+        console.log('tak, jest event daily');
+        for(let i = minDate; i <= maxDate; i = utils.addDays(i, 1)){
+          thisBooking.makeBooked(utils.dateToStr(i), event.hour, event.duration, event.table);
+        }
+      }
+    }
   }
+
+  makeBooked(date, hour, duration, table){
+    const thisBooking = this;
+
+    console.log('booked dates', thisBooking.booked);
+
+    if(typeof thisBooking.booked[date] === 'undefined'){
+      thisBooking.booked[date] = {};
+    } 
+    const startingHour = utils.hourToNumber(hour);
+
+    for(let hourBlock = startingHour; hourBlock <= startingHour + duration; hourBlock += 0.5){
+      if(typeof thisBooking.booked[date][hourBlock] === 'undefined'){
+        thisBooking.booked[date][hourBlock] = [table];
+      } else {
+        thisBooking.booked[date][hourBlock].push(table);
+      }
+    }
+  }
+  
   
   
   initWidgets(){

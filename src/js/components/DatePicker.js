@@ -11,8 +11,6 @@ export class DatePicker extends BaseWidget {
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.datePicker.input);
 
     thisWidget.initPlugin();
-    console.log(thisWidget.minDate);
-    console.log(utils.dateToStr(thisWidget.minDate));
 
     flatpickr(thisWidget.dom.input, {
       defaultDate: thisWidget.minDate,
