@@ -27,6 +27,7 @@ export class Booking {
     thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount);
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
+    thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
   }
 
   getData(){
@@ -96,9 +97,11 @@ export class Booking {
         }
       }
     }
+    thisBooking.updateDOM();
   }
 
   makeBooked(date, hour, duration, table){
+
     const thisBooking = this;
 
     //console.log('booked dates', thisBooking.booked);
@@ -117,6 +120,16 @@ export class Booking {
     }
   }
   
+  updateDOM(){
+    const thisBooking = this;
+
+    thisBooking.date = thisBooking.datePicker.value;
+    thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+
+    console.log('it is booked');
+    console.log(thisBooking.date);
+    console.log(thisBooking.hour);
+  }
   
   
   initWidgets(){
@@ -125,5 +138,10 @@ export class Booking {
     thisBooking.hoursAmount = new AmountWidget(thisBooking.dom.hoursAmount);
     thisBooking.datePicker = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPicker = new HourPicker(thisBooking.dom.hourPicker);
+
+    thisBooking.dom.wrapper.addEventListener('updated', function(event){
+      event.preventDefault();
+      thisBooking.updateDOM();
+    })
   }
 }
