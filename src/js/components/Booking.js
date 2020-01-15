@@ -14,6 +14,7 @@ export class Booking {
     thisBooking.render(reservWidgetContainer);
     thisBooking.initWidgets();
     thisBooking.getData();
+    thisBooking.initTableHandlers();
 
   }
 
@@ -105,8 +106,6 @@ export class Booking {
 
     const thisBooking = this;
 
-    //console.log('booked dates', thisBooking.booked);
-
     if(typeof thisBooking.booked[date] === 'undefined'){
       thisBooking.booked[date] = {};
     } 
@@ -124,14 +123,16 @@ export class Booking {
   updateDOM(){
     const thisBooking = this;
     let correctDate = thisBooking.datePicker.value;
+    console.log(correctDate);
 
     if(Array.isArray(correctDate)){
       correctDate = utils.dateToStr(correctDate[0]);
+      console.log(correctDate);
     } 
 
     thisBooking.date = correctDate;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
-    console.log(thisBooking.date);
+    //console.log(thisBooking.date);
 
     for(let table of thisBooking.dom.tables){
       let tableId = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
@@ -140,11 +141,24 @@ export class Booking {
       typeof thisBooking.booked[thisBooking.date][thisBooking.hour] !== 'undefined' &&
       thisBooking.booked[thisBooking.date][thisBooking.hour].indexOf(tableId) !== -1){
         table.classList.add(classNames.booking.tableBooked);
-        console.log('dodalem');
+        //console.log('dodalem');
       } else {
         table.classList.remove(classNames.booking.tableBooked);
-        console.log('zabralem');
+        //console.log('zabralem');
       }
+    }
+  }
+
+  initTableHandlers(){
+    const thisBooking = this;
+
+    for(let table of thisBooking.dom.tables){
+      table.addEventListener('click', function(){
+        table.classList.add(classNames.booking.tableBooked);
+        let tableId = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
+        console.log('zabukowalem', tableId, table);
+      });
+      
     }
   }
   
