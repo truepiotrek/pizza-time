@@ -90,7 +90,7 @@ export class Booking {
 
     for(let event of eventsRepeat){
       if(event.repeat === 'daily'){
-        console.log('tak, jest event daily');
+        //console.log('tak, jest event daily');
         for(let i = minDate; i <= maxDate; i = utils.addDays(i, 1)){
           thisBooking.makeBooked(utils.dateToStr(i), event.hour, event.duration, event.table);
         }
@@ -101,7 +101,7 @@ export class Booking {
   makeBooked(date, hour, duration, table){
     const thisBooking = this;
 
-    console.log('booked dates', thisBooking.booked);
+    //console.log('booked dates', thisBooking.booked);
 
     if(typeof thisBooking.booked[date] === 'undefined'){
       thisBooking.booked[date] = {};
