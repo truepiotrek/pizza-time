@@ -142,6 +142,6 @@ export class Booking {
     thisBooking.dom.wrapper.addEventListener('updated', function(event){
       event.preventDefault();
       thisBooking.updateDOM();
-    })
+    });
   }
 }

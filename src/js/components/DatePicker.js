@@ -23,7 +23,10 @@ export class DatePicker extends BaseWidget {
         function(date){
           return (date.getDay() === 0 || date.getDay() === 6);
         }
-      ]
+      ],
+      onchange: function(dateStr){
+        thisWidget.value = dateStr;
+      }
     });
   }
 
