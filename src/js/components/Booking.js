@@ -123,7 +123,6 @@ export class Booking {
   updateDOM(){
     const thisBooking = this;
     let correctDate = thisBooking.datePicker.value;
-    console.log(correctDate);
 
     if(Array.isArray(correctDate)){
       correctDate = utils.dateToStr(correctDate[0]);
@@ -143,7 +142,7 @@ export class Booking {
         table.classList.add(classNames.booking.tableBooked);
         //console.log('dodalem');
       } else {
-        table.classList.remove(classNames.booking.tableBooked);
+        table.classList.remove(classNames.booking.tableBooked, 'selectedByUser');
         //console.log('zabralem');
       }
     }
@@ -154,9 +153,9 @@ export class Booking {
 
     for(let table of thisBooking.dom.tables){
       table.addEventListener('click', function(){
-        table.classList.add(classNames.booking.tableBooked);
+        table.classList.add(classNames.booking.tableBooked, 'selectedByUser');
         let tableId = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
-        console.log('zabukowalem', tableId, table);
+        console.log('zabukowalem stolik nr: ', tableId, table);
       });
       
     }

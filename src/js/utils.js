@@ -62,7 +62,7 @@ utils.hourToNumber = function(hour){
 };
 
 utils.dateToStr = function(dateObj){
-  return dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1) + '-' + dateObj.getDate();
+  return dateObj.getFullYear() + '-' + ('0' + (dateObj.getMonth() + 1)).slice(-2) + '-' + dateObj.getDate();
 };
 
 utils.addDays = function(dateStr, days){
