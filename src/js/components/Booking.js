@@ -1,4 +1,5 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
+
 import {templates, select, settings, classNames} from '../settings.js';
 import { AmountWidget } from './AmountWidget.js';
 import { DatePicker } from './DatePicker.js';
@@ -122,18 +123,27 @@ export class Booking {
   
   updateDOM(){
     const thisBooking = this;
+    let correctDate = thisBooking.datePicker.value;
 
-    thisBooking.date = thisBooking.datePicker.value;
+    if(Array.isArray(correctDate)){
+      correctDate = utils.dateToStr(correctDate[0]);
+    } 
+
+    thisBooking.date = correctDate;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
+    console.log(thisBooking.date);
 
     for(let table of thisBooking.dom.tables){
-      const tableId = table.getAttribute(settings.booking.tableIdAttribute);
-      console.log(tableId);
-      
-      if(thisBooking.booked[thisBooking.date] && thisBooking.booked[thisBooking.date][thisBooking.hour] && thisBooking.booked[thisBooking.date][thisBooking.hour]){
-        table[tableId].classList.add(classNames.booking.tableBooked);
+      let tableId = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
+
+      if(typeof thisBooking.booked[thisBooking.date] !== 'undefined' && 
+      typeof thisBooking.booked[thisBooking.date][thisBooking.hour] !== 'undefined' &&
+      thisBooking.booked[thisBooking.date][thisBooking.hour].indexOf(tableId) !== -1){
+        table.classList.add(classNames.booking.tableBooked);
+        console.log('dodalem');
       } else {
-        table[tableId].classList.remove(classNames.booking.tableBooked);
+        table.classList.remove(classNames.booking.tableBooked);
+        console.log('zabralem');
       }
     }
   }
