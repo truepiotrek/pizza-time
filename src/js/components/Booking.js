@@ -1,5 +1,5 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
-import {templates, select, settings} from '../settings.js';
+import {templates, select, settings, classNames} from '../settings.js';
 import { AmountWidget } from './AmountWidget.js';
 import { DatePicker } from './DatePicker.js';
 import { HourPicker } from './HourPicker.js';
@@ -126,11 +126,17 @@ export class Booking {
     thisBooking.date = thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
 
-    console.log('it is booked');
-    console.log(thisBooking.date);
-    console.log(thisBooking.hour);
+    for(let table of thisBooking.dom.tables){
+      const tableId = table.getAttribute(settings.booking.tableIdAttribute);
+      console.log(tableId);
+      
+      if(thisBooking.booked[thisBooking.date] && thisBooking.booked[thisBooking.date][thisBooking.hour] && thisBooking.booked[thisBooking.date][thisBooking.hour]){
+        table[tableId].classList.add(classNames.booking.tableBooked);
+      } else {
+        table[tableId].classList.remove(classNames.booking.tableBooked);
+      }
+    }
   }
-  
   
   initWidgets(){
     const thisBooking = this;
