@@ -15,6 +15,8 @@ export class Booking {
     thisBooking.initWidgets();
     thisBooking.getData();
     thisBooking.initTableHandlers();
+    thisBooking.submitBooking();
+    thisBooking.getBookingData();
 
   }
 
@@ -30,6 +32,7 @@ export class Booking {
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
+    thisBooking.dom.submitButton = thisBooking.dom.wrapper.querySelector(select.booking.submitButton);
   }
 
   getData(){
@@ -100,6 +103,35 @@ export class Booking {
       }
     }
     thisBooking.updateDOM();
+  }
+
+  getBookingData(){
+    const thisBooking = this;
+    console.log('wyslalem booking', thisBooking);
+
+    const url = settings.db.url + '/' + settings.db.booking;
+    console.log(url);
+
+    const payload = {
+      date: thisBooking.datePicker.value,
+      hour: thisBooking.hourPicker.value,
+      duration: thisBooking.hoursAmount.value,
+      peopleAmount: '',
+      table: '',
+      starters: '',
+    };
+
+    console.log(payload);
+  }
+
+  submitBooking(){
+    const thisBooking = this;
+    console.log('preventuje raz');
+
+    thisBooking.dom.submitButton.addEventListener('click', function(event){
+      event.preventDefault();
+      console.log(thisBooking.getBookingData);
+    });
   }
 
   makeBooked(date, hour, duration, table){

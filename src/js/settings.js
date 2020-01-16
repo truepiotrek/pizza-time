@@ -16,6 +16,7 @@
       peopleAmount: '.people-amount',
       hoursAmount: '.hours-amount',
       tables: '.floor-plan .table',
+      submitButton: '.order-confirmation .btn-secondary'
     },
     all: {
       menuProducts: '#product-list > .product',
@@ -65,7 +66,7 @@
       edit: '[href="#edit"]',
       remove: '[href="#remove"]',
     },
-    
+
     nav: {
       links: '.main-nav a',
     },
