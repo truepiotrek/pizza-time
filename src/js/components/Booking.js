@@ -16,8 +16,6 @@ export class Booking {
     thisBooking.getData();
     thisBooking.initTableHandlers();
     thisBooking.submitBooking();
-    thisBooking.getBookingData();
-
   }
 
   render(bookingContainer){
@@ -32,7 +30,10 @@ export class Booking {
     thisBooking.dom.datePicker = thisBooking.dom.wrapper.querySelector(select.widgets.datePicker.wrapper);
     thisBooking.dom.hourPicker = thisBooking.dom.wrapper.querySelector(select.widgets.hourPicker.wrapper);
     thisBooking.dom.tables = thisBooking.dom.wrapper.querySelectorAll(select.booking.tables);
-    thisBooking.dom.submitButton = thisBooking.dom.wrapper.querySelector(select.booking.submitButton);
+    thisBooking.dom.bookTable = thisBooking.dom.wrapper.querySelector(select.booking.bookTable);
+    thisBooking.dom.address = thisBooking.dom.wrapper.querySelector(select.booking.address);
+    thisBooking.dom.phone = thisBooking.dom.wrapper.querySelector(select.booking.phone);
+    thisBooking.dom.starters = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
   }
 
   getData(){
@@ -107,30 +108,67 @@ export class Booking {
 
   getBookingData(){
     const thisBooking = this;
-    console.log('wyslalem booking', thisBooking);
+    console.log('tu jest data z nowym utilsem', thisBooking.datePicker.value);
+    let correctDate = thisBooking.datePicker.value;
 
-    const url = settings.db.url + '/' + settings.db.booking;
-    console.log(url);
+    if(Array.isArray(correctDate)){
+      correctDate = utils.dateToStr(correctDate[0]);
+      console.log(correctDate);
+    }
 
     const payload = {
-      date: thisBooking.datePicker.value,
+      date: correctDate,
       hour: thisBooking.hourPicker.value,
       duration: thisBooking.hoursAmount.value,
-      peopleAmount: '',
-      table: '',
-      starters: '',
+      peopleAmount: thisBooking.peopleAmount.value,
+      bookingAddress: thisBooking.dom.address.value,
+      bookingPhone: thisBooking.dom.phone.value,
+      table: [],
+      starters: [],
     };
 
-    console.log(payload);
+    for(let starter of thisBooking.dom.starters){
+      console.log(starter);
+      if(starter.checked === true){
+        payload.starters.push(starter.value);
+      }
+    }
+
+    for(let table of thisBooking.dom.tables){
+      if(table.classList.contains(classNames.booking.bookedByUser)){
+        let tableId = parseInt(table.getAttribute(settings.booking.tableIdAttribute));
+        payload.table.push(tableId);
+      }
+    }
+    
+
+    return payload;
   }
 
   submitBooking(){
     const thisBooking = this;
-    console.log('preventuje raz');
+    //console.log('preventuje raz');
+    const url = settings.db.url + '/' + settings.db.booking;
 
-    thisBooking.dom.submitButton.addEventListener('click', function(event){
+    thisBooking.dom.bookTable.addEventListener('click', function(event){
       event.preventDefault();
-      console.log(thisBooking.getBookingData);
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(thisBooking.getBookingData()),
+      };
+  
+      fetch(url, options)
+        .then(function(response){
+          return response.json();
+        }).then(function(parsedResponse){
+          console.log('parsedResponse', parsedResponse);
+          for(let table of parsedResponse.table){
+            thisBooking.makeBooked(parsedResponse.date, parsedResponse.hour, parsedResponse.duration, table);
+          }
+        });
     });
   }
 
@@ -174,7 +212,7 @@ export class Booking {
         table.classList.add(classNames.booking.tableBooked);
         //console.log('dodalem');
       } else {
-        table.classList.remove(classNames.booking.tableBooked, 'selectedByUser');
+        table.classList.remove(classNames.booking.tableBooked, classNames.booking.bookedByUser);
         //console.log('zabralem');
       }
     }

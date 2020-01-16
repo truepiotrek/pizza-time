@@ -16,7 +16,10 @@
       peopleAmount: '.people-amount',
       hoursAmount: '.hours-amount',
       tables: '.floor-plan .table',
-      submitButton: '.order-confirmation .btn-secondary'
+      bookTable: '.booking-form [type="submit"]',
+      address: '.booking-form [name="address"]',
+      phone: '.booking-form [name="phone"]',
+      starters: '.booking-form [name="starter"]',
     },
     all: {
       menuProducts: '#product-list > .product',
@@ -83,6 +86,7 @@
     booking: {
       loading: 'loading',
       tableBooked: 'booked',
+      bookedByUser: 'selectedByUser'
     },
     nav: {
       active: 'active',
