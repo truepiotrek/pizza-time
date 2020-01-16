@@ -105,23 +105,12 @@ export class Booking {
     }
     thisBooking.updateDOM();
   }
-  getProperDataFromDatePicker(){
-    const thisBooking = this;
-    let correctDate = thisBooking.datePicker.value;
-
-    if(Array.isArray(correctDate)){
-      correctDate = utils.dateToStr(correctDate[0]);
-    }
-    return correctDate;
-  }
-
-
 
   getBookingData(){
     const thisBooking = this;
 
     const payload = {
-      date: thisBooking.getProperDataFromDatePicker(),
+      date: thisBooking.datePicker.value,
       hour: thisBooking.hourPicker.value,
       duration: thisBooking.hoursAmount.value,
       peopleAmount: thisBooking.peopleAmount.value,
@@ -198,7 +187,7 @@ export class Booking {
     const thisBooking = this;
     
 
-    thisBooking.date = thisBooking.getProperDataFromDatePicker();
+    thisBooking.date =  thisBooking.datePicker.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
     //console.log(thisBooking.date);
 

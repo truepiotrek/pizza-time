@@ -32,9 +32,23 @@ export class DatePicker extends BaseWidget {
         }
       ],
       onChange: function(dateStr){
+        if(Array.isArray(dateStr)){
+          dateStr = utils.dateToStr(dateStr[0]);
+        }
+        console.log('odpalam sie', dateStr);
         thisWidget.value = dateStr;
       }
     });
+  }
+
+  getProperDataFromDatePicker(){
+    const thisBooking = this;
+    let correctDate = thisBooking.datePicker.value;
+
+    if(Array.isArray(correctDate)){
+      correctDate = utils.dateToStr(correctDate[0]);
+    }
+    return correctDate;
   }
 
   parseValue(newValue){
