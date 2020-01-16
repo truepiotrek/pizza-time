@@ -105,19 +105,23 @@ export class Booking {
     }
     thisBooking.updateDOM();
   }
-
-  getBookingData(){
+  getProperDataFromDatePicker(){
     const thisBooking = this;
-    console.log('tu jest data z nowym utilsem', thisBooking.datePicker.value);
     let correctDate = thisBooking.datePicker.value;
 
     if(Array.isArray(correctDate)){
       correctDate = utils.dateToStr(correctDate[0]);
-      console.log(correctDate);
     }
+    return correctDate;
+  }
+
+
+
+  getBookingData(){
+    const thisBooking = this;
 
     const payload = {
-      date: correctDate,
+      date: thisBooking.getProperDataFromDatePicker(),
       hour: thisBooking.hourPicker.value,
       duration: thisBooking.hoursAmount.value,
       peopleAmount: thisBooking.peopleAmount.value,
@@ -192,14 +196,9 @@ export class Booking {
   
   updateDOM(){
     const thisBooking = this;
-    let correctDate = thisBooking.datePicker.value;
+    
 
-    if(Array.isArray(correctDate)){
-      correctDate = utils.dateToStr(correctDate[0]);
-      console.log(correctDate);
-    } 
-
-    thisBooking.date = correctDate;
+    thisBooking.date = thisBooking.getProperDataFromDatePicker();
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPicker.value);
     //console.log(thisBooking.date);
 
