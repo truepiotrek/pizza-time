@@ -175,10 +175,18 @@ export class Booking {
     const startingHour = utils.hourToNumber(hour);
 
     for(let hourBlock = startingHour; hourBlock <= startingHour + duration; hourBlock += 0.5){
-      if(typeof thisBooking.booked[date][hourBlock] === 'undefined'){
-        thisBooking.booked[date][hourBlock] = [table];
+      if(typeof thisBooking.booked[date][hourBlock] === 'undefined') {
+        if(Array.isArray(table)) {
+          thisBooking.booked[date][hourBlock] = table;
+        } else {
+          thisBooking.booked[date][hourBlock] = [table];
+        } 
       } else {
-        thisBooking.booked[date][hourBlock].push(table);
+        if(Array.isArray(table)) {
+          thisBooking.booked[date][hourBlock] = thisBooking.booked[date][hourBlock].concat(table);
+        } else {
+          thisBooking.booked[date][hourBlock].push(table);
+        }       
       }
     }
   }
